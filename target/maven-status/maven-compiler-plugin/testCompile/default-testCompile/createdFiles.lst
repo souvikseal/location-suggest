@@ -1,0 +1,3 @@
+com/geolocation/suggest/dataAccess/SuggestDAOTest.class
+com/geolocation/suggest/service/SuggestServiceTest.class
+com/geolocation/suggest/web/SuggestServiceTest.class

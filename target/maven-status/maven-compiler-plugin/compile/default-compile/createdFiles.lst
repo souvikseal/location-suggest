@@ -1,0 +1,12 @@
+com/geolocation/suggest/model/Province.class
+com/geolocation/suggest/model/Location.class
+com/geolocation/suggest/model/Suggestions.class
+com/geolocation/suggest/SuggestApplication.class
+com/geolocation/suggest/model/Suggestion.class
+com/geolocation/suggest/service/SuggestionServiceImpl.class
+com/geolocation/suggest/exception/SuggestionExceptionHandler.class
+com/geolocation/suggest/dataAccess/LocationDAO.class
+com/geolocation/suggest/model/ResponseItem.class
+com/geolocation/suggest/web/SuggestionController.class
+com/geolocation/suggest/service/SuggestionService.class
+com/geolocation/suggest/dataAccess/LocationDAOImpl.class
