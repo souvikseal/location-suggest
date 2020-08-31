@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
@@ -41,8 +42,9 @@ public class SuggestionExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
-		return new ResponseEntity<Object>(displayError("EXCEPTION: Bad request, type Mismatch for latitude/longitude."),
-				status);
+		return new ResponseEntity<>(displayError("EXCEPTION: Bad request, Invalid Type." + " Parameter: "
+				+ ((MethodArgumentTypeMismatchException) ex).getName() + ". Required Type: "
+				+ ex.getRequiredType().getSimpleName()), status);
 	}
 
 	/**
