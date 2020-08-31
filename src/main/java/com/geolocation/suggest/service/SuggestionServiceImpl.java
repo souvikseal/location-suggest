@@ -72,8 +72,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 	 */
 	private Double getScore(Location fl, String key, Double latitude, Double longitude) {
 		Double queryMatchScore = getQueryMatchScore(fl.getCity(), key);
-		double distance = distance(fl.getLatitude(), fl.getLongitude(), latitude, longitude);
-		Double distanceMatchScore = getDistanceMatchScore(distance);
+		Double distance = distance(fl.getLatitude(), fl.getLongitude(), latitude, longitude);
+		Double distanceMatchScore = distance == null ? queryMatchScore : getDistanceMatchScore(distance);
 		logger.info("City : {}, Distance: {}, QueryMatchScore : {}, DistanceMatchScore: {}", fl.getCity(), distance,
 				queryMatchScore, distanceMatchScore);
 		return roundToFirstDecimal(queryMatchScore + distanceMatchScore);
@@ -124,9 +124,12 @@ public class SuggestionServiceImpl implements SuggestionService {
 	 * @param lon2: input longitude
 	 * @return a double distance
 	 */
-	private double distance(Double lat1, Double lon1, Double lat2, Double lon2) {
-		if ((lat1 == null || lat2 == null || lon1 == null || lon2 == null) || (lat1 == lat2) && (lon1 == lon2)) {
-			return 0;
+	private Double distance(Double lat1, Double lon1, Double lat2, Double lon2) {
+		if ((lat1 == null || lat2 == null || lon1 == null || lon2 == null)) {
+			return null;
+		}
+		if ((lat1 == lat2) && (lon1 == lon2)) {
+			return 0.0;
 		}
 		double lonDiff = lon1 - lon2;
 		double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2))
